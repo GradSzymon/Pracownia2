@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="FilmyModelStoreContainer" CdmEntityContainer="FilmyEntities1">
+    <EntitySetMapping Name="Aktorzies">
+      <EntityTypeMapping TypeName="FilmyModel.Aktorzy">
+        <MappingFragment StoreEntitySet="Aktorzy">
+          <ScalarProperty Name="IDA" ColumnName="IDA" />
+          <ScalarProperty Name="Imie" ColumnName="Imie" />
+          <ScalarProperty Name="Nazwisko" ColumnName="Nazwisko" />
+          <ScalarProperty Name="Film" ColumnName="Film" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FilmyFs">
+      <EntityTypeMapping TypeName="FilmyModel.FilmyF">
+        <MappingFragment StoreEntitySet="FilmyF">
+          <ScalarProperty Name="IDF" ColumnName="IDF" />
+          <ScalarProperty Name="Nazwa" ColumnName="Nazwa" />
+          <ScalarProperty Name="Gatunek" ColumnName="Gatunek" />
+          <ScalarProperty Name="Rok" ColumnName="Rok" />
+          <ScalarProperty Name="Rezyser_Glowny" ColumnName="Rezyser_Glowny" />
+          <ScalarProperty Name="Ocena" ColumnName="Ocena" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Rezysers">
+      <EntityTypeMapping TypeName="FilmyModel.Rezyser">
+        <MappingFragment StoreEntitySet="Rezyser">
+          <ScalarProperty Name="IDD" ColumnName="IDD" />
+          <ScalarProperty Name="Imie" ColumnName="Imie" />
+          <ScalarProperty Name="Nazwisko" ColumnName="Nazwisko" />
+          <ScalarProperty Name="Kraj" ColumnName="Kraj" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Wytwornias">
+      <EntityTypeMapping TypeName="FilmyModel.Wytwornia">
+        <MappingFragment StoreEntitySet="Wytwornia">
+          <ScalarProperty Name="IDW" ColumnName="IDW" />
+          <ScalarProperty Name="NazwaW" ColumnName="NazwaW" />
+          <ScalarProperty Name="Film" ColumnName="Film" />
+          <ScalarProperty Name="RezyserFilmu" ColumnName="RezyserFilmu" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

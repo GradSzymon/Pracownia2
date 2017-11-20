@@ -1,0 +1,119 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="FilmyModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Aktorzy">
+    <Key>
+      <PropertyRef Name="IDA" />
+    </Key>
+    <Property Name="IDA" Type="Int32" Nullable="false" />
+    <Property Name="Imie" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Nazwisko" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Film" Type="Int32" />
+    <NavigationProperty Name="FilmyF" Relationship="Self.FK__Aktorzy__Film__35BCFE0A" FromRole="Aktorzy" ToRole="FilmyF" />
+  </EntityType>
+  <EntityType Name="FilmyF">
+    <Key>
+      <PropertyRef Name="IDF" />
+    </Key>
+    <Property Name="IDF" Type="Int32" Nullable="false" />
+    <Property Name="Nazwa" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Gatunek" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Rok" Type="Int32" />
+    <Property Name="Rezyser_Glowny" Type="Int32" />
+    <Property Name="Ocena" Type="Int32" />
+    <NavigationProperty Name="Aktorzies" Relationship="Self.FK__Aktorzy__Film__35BCFE0A" FromRole="FilmyF" ToRole="Aktorzy" />
+    <NavigationProperty Name="Rezyser" Relationship="Self.FK__FilmyF__Reżyser__37A5467C" FromRole="FilmyF" ToRole="Rezyser" />
+    <NavigationProperty Name="Wytwornias" Relationship="Self.FK__Wytwornia__Film__36B12243" FromRole="FilmyF" ToRole="Wytwornia" />
+  </EntityType>
+  <EntityType Name="Rezyser">
+    <Key>
+      <PropertyRef Name="IDD" />
+    </Key>
+    <Property Name="IDD" Type="Int32" Nullable="false" />
+    <Property Name="Imie" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Nazwisko" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Kraj" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="FilmyFs" Relationship="Self.FK__FilmyF__Reżyser__37A5467C" FromRole="Rezyser" ToRole="FilmyF" />
+    <NavigationProperty Name="Wytwornias" Relationship="Self.FK__Wytwornia__Rezys__30F848ED" FromRole="Rezyser" ToRole="Wytwornia" />
+  </EntityType>
+  <EntityType Name="Wytwornia">
+    <Key>
+      <PropertyRef Name="IDW" />
+    </Key>
+    <Property Name="IDW" Type="Int32" Nullable="false" />
+    <Property Name="NazwaW" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Film" Type="Int32" />
+    <Property Name="RezyserFilmu" Type="Int32" />
+    <NavigationProperty Name="FilmyF" Relationship="Self.FK__Wytwornia__Film__36B12243" FromRole="Wytwornia" ToRole="FilmyF" />
+    <NavigationProperty Name="Rezyser" Relationship="Self.FK__Wytwornia__Rezys__30F848ED" FromRole="Wytwornia" ToRole="Rezyser" />
+  </EntityType>
+  <Association Name="FK__Aktorzy__Film__35BCFE0A">
+    <End Role="FilmyF" Type="Self.FilmyF" Multiplicity="0..1" />
+    <End Role="Aktorzy" Type="Self.Aktorzy" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="FilmyF">
+        <PropertyRef Name="IDF" />
+      </Principal>
+      <Dependent Role="Aktorzy">
+        <PropertyRef Name="Film" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__FilmyF__Reżyser__37A5467C">
+    <End Role="Rezyser" Type="Self.Rezyser" Multiplicity="0..1" />
+    <End Role="FilmyF" Type="Self.FilmyF" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Rezyser">
+        <PropertyRef Name="IDD" />
+      </Principal>
+      <Dependent Role="FilmyF">
+        <PropertyRef Name="Rezyser_Glowny" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Wytwornia__Film__36B12243">
+    <End Role="FilmyF" Type="Self.FilmyF" Multiplicity="0..1" />
+    <End Role="Wytwornia" Type="Self.Wytwornia" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="FilmyF">
+        <PropertyRef Name="IDF" />
+      </Principal>
+      <Dependent Role="Wytwornia">
+        <PropertyRef Name="Film" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Wytwornia__Rezys__30F848ED">
+    <End Role="Rezyser" Type="Self.Rezyser" Multiplicity="0..1" />
+    <End Role="Wytwornia" Type="Self.Wytwornia" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Rezyser">
+        <PropertyRef Name="IDD" />
+      </Principal>
+      <Dependent Role="Wytwornia">
+        <PropertyRef Name="RezyserFilmu" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="FilmyEntities1" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Aktorzies" EntityType="Self.Aktorzy" />
+    <EntitySet Name="FilmyFs" EntityType="Self.FilmyF" />
+    <EntitySet Name="Rezysers" EntityType="Self.Rezyser" />
+    <EntitySet Name="Wytwornias" EntityType="Self.Wytwornia" />
+    <AssociationSet Name="FK__Aktorzy__Film__35BCFE0A" Association="Self.FK__Aktorzy__Film__35BCFE0A">
+      <End Role="FilmyF" EntitySet="FilmyFs" />
+      <End Role="Aktorzy" EntitySet="Aktorzies" />
+    </AssociationSet>
+    <AssociationSet Name="FK__FilmyF__Reżyser__37A5467C" Association="Self.FK__FilmyF__Reżyser__37A5467C">
+      <End Role="Rezyser" EntitySet="Rezysers" />
+      <End Role="FilmyF" EntitySet="FilmyFs" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Wytwornia__Film__36B12243" Association="Self.FK__Wytwornia__Film__36B12243">
+      <End Role="FilmyF" EntitySet="FilmyFs" />
+      <End Role="Wytwornia" EntitySet="Wytwornias" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Wytwornia__Rezys__30F848ED" Association="Self.FK__Wytwornia__Rezys__30F848ED">
+      <End Role="Rezyser" EntitySet="Rezysers" />
+      <End Role="Wytwornia" EntitySet="Wytwornias" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

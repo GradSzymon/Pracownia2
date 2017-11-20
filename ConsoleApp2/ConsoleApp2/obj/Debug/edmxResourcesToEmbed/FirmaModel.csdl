@@ -1,0 +1,136 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="FirmaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Kontakty">
+    <Key>
+      <PropertyRef Name="Osoba" />
+    </Key>
+    <Property Name="IDK" Type="Int32" Nullable="false" />
+    <Property Name="Osoba" Type="Int32" Nullable="false" />
+    <Property Name="Telefon" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Managers" Relationship="Self.FK__Manager__Dane_Ko__300424B4" FromRole="Kontakty" ToRole="Manager" />
+    <NavigationProperty Name="Pracownicies" Relationship="Self.FK__Pracownic__Dane___30F848ED" FromRole="Kontakty" ToRole="Pracownicy" />
+  </EntityType>
+  <EntityType Name="Manager">
+    <Key>
+      <PropertyRef Name="IDM" />
+    </Key>
+    <Property Name="IDM" Type="Int32" Nullable="false" />
+    <Property Name="Imie" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Naziwsko" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Dane_Kontaktowe" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Kontakty" Relationship="Self.FK__Manager__Dane_Ko__300424B4" FromRole="Manager" ToRole="Kontakty" />
+    <NavigationProperty Name="Oddzials" Relationship="Self.FK__Oddzial__Szef_Od__2C3393D0" FromRole="Manager" ToRole="Oddzial" />
+    <NavigationProperty Name="Pracownicies" Relationship="Self.FK__Pracownicy__Szef__286302EC" FromRole="Manager" ToRole="Pracownicy" />
+  </EntityType>
+  <EntityType Name="Oddzial">
+    <Key>
+      <PropertyRef Name="IDO" />
+    </Key>
+    <Property Name="IDO" Type="Int32" Nullable="false" />
+    <Property Name="Nazwa_Oddzialu" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Szef_Oddzialu" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Manager" Relationship="Self.FK__Oddzial__Szef_Od__2C3393D0" FromRole="Oddzial" ToRole="Manager" />
+    <NavigationProperty Name="Pracownicies" Relationship="Self.FK__Pracownic__Dzial__2D27B809" FromRole="Oddzial" ToRole="Pracownicy" />
+  </EntityType>
+  <EntityType Name="Pracownicy">
+    <Key>
+      <PropertyRef Name="IDP" />
+    </Key>
+    <Property Name="IDP" Type="Int32" Nullable="false" />
+    <Property Name="Imie" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Nazwisko" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Szef" Type="Int32" Nullable="false" />
+    <Property Name="Dane_Kontaktowe" Type="Int32" Nullable="false" />
+    <Property Name="Dzial" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Kontakty" Relationship="Self.FK__Pracownic__Dane___30F848ED" FromRole="Pracownicy" ToRole="Kontakty" />
+    <NavigationProperty Name="Manager" Relationship="Self.FK__Pracownicy__Szef__286302EC" FromRole="Pracownicy" ToRole="Manager" />
+    <NavigationProperty Name="Oddzial" Relationship="Self.FK__Pracownic__Dzial__2D27B809" FromRole="Pracownicy" ToRole="Oddzial" />
+  </EntityType>
+  <Association Name="FK__Manager__Dane_Ko__300424B4">
+    <End Role="Kontakty" Type="Self.Kontakty" Multiplicity="1" />
+    <End Role="Manager" Type="Self.Manager" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Kontakty">
+        <PropertyRef Name="Osoba" />
+      </Principal>
+      <Dependent Role="Manager">
+        <PropertyRef Name="Dane_Kontaktowe" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Pracownic__Dane___30F848ED">
+    <End Role="Kontakty" Type="Self.Kontakty" Multiplicity="1" />
+    <End Role="Pracownicy" Type="Self.Pracownicy" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Kontakty">
+        <PropertyRef Name="Osoba" />
+      </Principal>
+      <Dependent Role="Pracownicy">
+        <PropertyRef Name="Dane_Kontaktowe" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Oddzial__Szef_Od__2C3393D0">
+    <End Role="Manager" Type="Self.Manager" Multiplicity="1" />
+    <End Role="Oddzial" Type="Self.Oddzial" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Manager">
+        <PropertyRef Name="IDM" />
+      </Principal>
+      <Dependent Role="Oddzial">
+        <PropertyRef Name="Szef_Oddzialu" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Pracownicy__Szef__286302EC">
+    <End Role="Manager" Type="Self.Manager" Multiplicity="1" />
+    <End Role="Pracownicy" Type="Self.Pracownicy" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Manager">
+        <PropertyRef Name="IDM" />
+      </Principal>
+      <Dependent Role="Pracownicy">
+        <PropertyRef Name="Szef" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Pracownic__Dzial__2D27B809">
+    <End Role="Oddzial" Type="Self.Oddzial" Multiplicity="1" />
+    <End Role="Pracownicy" Type="Self.Pracownicy" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Oddzial">
+        <PropertyRef Name="IDO" />
+      </Principal>
+      <Dependent Role="Pracownicy">
+        <PropertyRef Name="Dzial" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="FirmaEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Kontakties" EntityType="Self.Kontakty" />
+    <EntitySet Name="Managers" EntityType="Self.Manager" />
+    <EntitySet Name="Oddzials" EntityType="Self.Oddzial" />
+    <EntitySet Name="Pracownicies" EntityType="Self.Pracownicy" />
+    <AssociationSet Name="FK__Manager__Dane_Ko__300424B4" Association="Self.FK__Manager__Dane_Ko__300424B4">
+      <End Role="Kontakty" EntitySet="Kontakties" />
+      <End Role="Manager" EntitySet="Managers" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Pracownic__Dane___30F848ED" Association="Self.FK__Pracownic__Dane___30F848ED">
+      <End Role="Kontakty" EntitySet="Kontakties" />
+      <End Role="Pracownicy" EntitySet="Pracownicies" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Oddzial__Szef_Od__2C3393D0" Association="Self.FK__Oddzial__Szef_Od__2C3393D0">
+      <End Role="Manager" EntitySet="Managers" />
+      <End Role="Oddzial" EntitySet="Oddzials" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Pracownicy__Szef__286302EC" Association="Self.FK__Pracownicy__Szef__286302EC">
+      <End Role="Manager" EntitySet="Managers" />
+      <End Role="Pracownicy" EntitySet="Pracownicies" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Pracownic__Dzial__2D27B809" Association="Self.FK__Pracownic__Dzial__2D27B809">
+      <End Role="Oddzial" EntitySet="Oddzials" />
+      <End Role="Pracownicy" EntitySet="Pracownicies" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

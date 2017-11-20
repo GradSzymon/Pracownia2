@@ -1,0 +1,111 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="FilmyModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Aktorzy">
+    <Key>
+      <PropertyRef Name="IDA" />
+    </Key>
+    <Property Name="IDA" Type="int" Nullable="false" />
+    <Property Name="Imie" Type="varchar" MaxLength="50" />
+    <Property Name="Nazwisko" Type="varchar" MaxLength="50" />
+    <Property Name="Film" Type="int" />
+  </EntityType>
+  <EntityType Name="FilmyF">
+    <Key>
+      <PropertyRef Name="IDF" />
+    </Key>
+    <Property Name="IDF" Type="int" Nullable="false" />
+    <Property Name="Nazwa" Type="varchar" MaxLength="50" />
+    <Property Name="Gatunek" Type="varchar" MaxLength="50" />
+    <Property Name="Rok" Type="int" />
+    <Property Name="Rezyser_Glowny" Type="int" />
+    <Property Name="Ocena" Type="int" />
+  </EntityType>
+  <EntityType Name="Rezyser">
+    <Key>
+      <PropertyRef Name="IDD" />
+    </Key>
+    <Property Name="IDD" Type="int" Nullable="false" />
+    <Property Name="Imie" Type="varchar" MaxLength="50" />
+    <Property Name="Nazwisko" Type="varchar" MaxLength="50" />
+    <Property Name="Kraj" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Wytwornia">
+    <Key>
+      <PropertyRef Name="IDW" />
+    </Key>
+    <Property Name="IDW" Type="int" Nullable="false" />
+    <Property Name="NazwaW" Type="varchar" MaxLength="50" />
+    <Property Name="Film" Type="int" />
+    <Property Name="RezyserFilmu" Type="int" />
+  </EntityType>
+  <Association Name="FK__Aktorzy__Film__35BCFE0A">
+    <End Role="FilmyF" Type="Self.FilmyF" Multiplicity="0..1" />
+    <End Role="Aktorzy" Type="Self.Aktorzy" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="FilmyF">
+        <PropertyRef Name="IDF" />
+      </Principal>
+      <Dependent Role="Aktorzy">
+        <PropertyRef Name="Film" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__FilmyF__Reżyser__37A5467C">
+    <End Role="Rezyser" Type="Self.Rezyser" Multiplicity="0..1" />
+    <End Role="FilmyF" Type="Self.FilmyF" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Rezyser">
+        <PropertyRef Name="IDD" />
+      </Principal>
+      <Dependent Role="FilmyF">
+        <PropertyRef Name="Rezyser_Glowny" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Wytwornia__Film__36B12243">
+    <End Role="FilmyF" Type="Self.FilmyF" Multiplicity="0..1" />
+    <End Role="Wytwornia" Type="Self.Wytwornia" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="FilmyF">
+        <PropertyRef Name="IDF" />
+      </Principal>
+      <Dependent Role="Wytwornia">
+        <PropertyRef Name="Film" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Wytwornia__Rezys__30F848ED">
+    <End Role="Rezyser" Type="Self.Rezyser" Multiplicity="0..1" />
+    <End Role="Wytwornia" Type="Self.Wytwornia" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Rezyser">
+        <PropertyRef Name="IDD" />
+      </Principal>
+      <Dependent Role="Wytwornia">
+        <PropertyRef Name="RezyserFilmu" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="FilmyModelStoreContainer">
+    <EntitySet Name="Aktorzy" EntityType="Self.Aktorzy" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="FilmyF" EntityType="Self.FilmyF" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Rezyser" EntityType="Self.Rezyser" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Wytwornia" EntityType="Self.Wytwornia" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__Aktorzy__Film__35BCFE0A" Association="Self.FK__Aktorzy__Film__35BCFE0A">
+      <End Role="FilmyF" EntitySet="FilmyF" />
+      <End Role="Aktorzy" EntitySet="Aktorzy" />
+    </AssociationSet>
+    <AssociationSet Name="FK__FilmyF__Reżyser__37A5467C" Association="Self.FK__FilmyF__Reżyser__37A5467C">
+      <End Role="Rezyser" EntitySet="Rezyser" />
+      <End Role="FilmyF" EntitySet="FilmyF" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Wytwornia__Film__36B12243" Association="Self.FK__Wytwornia__Film__36B12243">
+      <End Role="FilmyF" EntitySet="FilmyF" />
+      <End Role="Wytwornia" EntitySet="Wytwornia" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Wytwornia__Rezys__30F848ED" Association="Self.FK__Wytwornia__Rezys__30F848ED">
+      <End Role="Rezyser" EntitySet="Rezyser" />
+      <End Role="Wytwornia" EntitySet="Wytwornia" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

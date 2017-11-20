@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="FirmaModelStoreContainer" CdmEntityContainer="FirmaEntities">
+    <EntitySetMapping Name="Kontakties">
+      <EntityTypeMapping TypeName="FirmaModel.Kontakty">
+        <MappingFragment StoreEntitySet="Kontakty">
+          <ScalarProperty Name="IDK" ColumnName="IDK" />
+          <ScalarProperty Name="Osoba" ColumnName="Osoba" />
+          <ScalarProperty Name="Telefon" ColumnName="Telefon" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Managers">
+      <EntityTypeMapping TypeName="FirmaModel.Manager">
+        <MappingFragment StoreEntitySet="Manager">
+          <ScalarProperty Name="IDM" ColumnName="IDM" />
+          <ScalarProperty Name="Imie" ColumnName="Imie" />
+          <ScalarProperty Name="Naziwsko" ColumnName="Naziwsko" />
+          <ScalarProperty Name="Dane_Kontaktowe" ColumnName="Dane_Kontaktowe" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Oddzials">
+      <EntityTypeMapping TypeName="FirmaModel.Oddzial">
+        <MappingFragment StoreEntitySet="Oddzial">
+          <ScalarProperty Name="IDO" ColumnName="IDO" />
+          <ScalarProperty Name="Nazwa_Oddzialu" ColumnName="Nazwa_Oddzialu" />
+          <ScalarProperty Name="Szef_Oddzialu" ColumnName="Szef_Oddzialu" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Pracownicies">
+      <EntityTypeMapping TypeName="FirmaModel.Pracownicy">
+        <MappingFragment StoreEntitySet="Pracownicy">
+          <ScalarProperty Name="IDP" ColumnName="IDP" />
+          <ScalarProperty Name="Imie" ColumnName="Imie" />
+          <ScalarProperty Name="Nazwisko" ColumnName="Nazwisko" />
+          <ScalarProperty Name="Szef" ColumnName="Szef" />
+          <ScalarProperty Name="Dane_Kontaktowe" ColumnName="Dane_Kontaktowe" />
+          <ScalarProperty Name="Dzial" ColumnName="Dzial" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

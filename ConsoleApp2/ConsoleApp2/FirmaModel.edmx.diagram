@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="69c4a30f6b9a461cbb2368feb89ecd20" Name="Diagram1">
+        <EntityTypeShape EntityType="FirmaModel.Kontakty" Width="1.5" PointX="0.75" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="FirmaModel.Manager" Width="1.5" PointX="3" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="FirmaModel.Oddzial" Width="1.5" PointX="5.25" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="FirmaModel.Pracownicy" Width="1.5" PointX="7.5" PointY="1" IsExpanded="true" />
+        <AssociationConnector Association="FirmaModel.FK__Manager__Dane_Ko__300424B4" ManuallyRouted="false" />
+        <AssociationConnector Association="FirmaModel.FK__Pracownic__Dane___30F848ED" ManuallyRouted="false" />
+        <AssociationConnector Association="FirmaModel.FK__Oddzial__Szef_Od__2C3393D0" ManuallyRouted="false" />
+        <AssociationConnector Association="FirmaModel.FK__Pracownicy__Szef__286302EC" ManuallyRouted="false" />
+        <AssociationConnector Association="FirmaModel.FK__Pracownic__Dzial__2D27B809" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
